@@ -1,0 +1,18 @@
+{
+    "messages":{
+        "lady":{
+            "source_lang_set_ok":"%sさんはこれから%sで話すのね。",
+            "source_auto_lang_set_ok":"%sさんが話した言葉を私なりに何語か判別して翻訳するわね。",
+            "target_lang_set_ok":"%sさんから言われた言葉はこれからは%sに翻訳するわね",
+            "message_lang_same_really":"%sさんがそれでいいならそうするけど・・・%sを%sに翻訳するなんて、不思議なお人ね。",
+            "message_lang_swap":"%sさんが話した%sを%sに翻訳するようにするわね",
+            "source_lang_set_error_from_auto":"%sさん、私が話す言葉を私が決められないわ",
+            "lang_set_error":"%sさん・・・そんな言葉、私は知らないわ。私が知っている言葉を「tb+help language」で確認してね。",
+            "status_lang_setting":"%sさんが話した%sを%sに翻訳するようにしてるわよ",
+            "status_lang_setting_src_auto":"%sさんが話した言葉は私なりに判断して翻訳するようにしてるわね。\nそれから%sに翻訳するようにしてるわよ。",
+            "request_limit":"順番に並んで話してちょうだい。そんなに矢継ぎ早に言われても困ってしまうわ",
+            "unknown_error":"うーん。何か調子が悪いみたい。お医者様に見てもらおうかしら・・・",
+            "bot_stop":"皆さん今日はありがと。またね。"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "api":{
+        "base":"AWS API Gateway URL",
+        "status":"/translate/status",
+        "set_language":"/translate/set/language",
+        "swap_language":"/translate/swap/language",
+        "run":"/translate/run",
+        "message":"/message"
+    }
+}
