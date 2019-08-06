@@ -1,0 +1,234 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Discord Translate Bot DynamoDB Tables Create
+
+Resources:
+  DiscordTranslateBotLangage:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: DiscordTranslateBot_Langage
+      AttributeDefinitions:
+        -
+          AttributeName: UserHash
+          AttributeType: S
+      KeySchema:
+        -
+          AttributeName: UserHash
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+  DiscordTranslateBotLangageWriteCapacityScalableTarget:
+    Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+    Properties:
+      MinCapacity: 2
+      MaxCapacity: 20
+      ResourceId: !Join
+        - /
+        - - table
+          - !Ref DiscordTranslateBotLangage
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: "dynamodb:table:WriteCapacityUnits"
+      ServiceNamespace: dynamodb
+  DiscordTranslateBotLangageWriteScalingPolicy:
+    Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+    Properties:
+      PolicyName: WriteAutoScalingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId:
+        Ref: DiscordTranslateBotLangageWriteCapacityScalableTarget
+      TargetTrackingScalingPolicyConfiguration:  
+        TargetValue: 70
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification:
+          PredefinedMetricType: DynamoDBWriteCapacityUtilization
+  DiscordTranslateBotLangageReadCapacityScalableTarget:
+    Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+    Properties: 
+      MinCapacity: 2
+      MaxCapacity: 50
+      ResourceId: !Join
+        - /
+        - - table
+          - !Ref DiscordTranslateBotLangage
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: "dynamodb:table:ReadCapacityUnits"
+      ServiceNamespace: dynamodb
+  DiscordTranslateBotLangageReadScalingPolicy: 
+    Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+    Properties: 
+      PolicyName: ReadAutoScalingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: 
+        Ref: DiscordTranslateBotLangageReadCapacityScalableTarget
+      TargetTrackingScalingPolicyConfiguration: 
+        TargetValue: 70
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification: 
+          PredefinedMetricType: DynamoDBReadCapacityUtilization
+
+  DiscordTranslateBotTranslatedText:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: DiscordTranslateBot_TranslatedText
+      AttributeDefinitions:
+        -
+          AttributeName: translate_scheme
+          AttributeType: S
+      KeySchema:
+        -
+          AttributeName: translate_scheme
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+  DiscordTranslateBotTranslatedTextWriteCapacityScalableTarget:
+    Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+    Properties:
+      MinCapacity: 2
+      MaxCapacity: 20
+      ResourceId: !Join
+        - /
+        - - table
+          - !Ref DiscordTranslateBotTranslatedText
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: "dynamodb:table:WriteCapacityUnits"
+      ServiceNamespace: dynamodb
+  DiscordTranslateBotTranslatedTextWriteScalingPolicy:
+    Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+    Properties:
+      PolicyName: WriteAutoScalingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId:
+        Ref: DiscordTranslateBotTranslatedTextWriteCapacityScalableTarget
+      TargetTrackingScalingPolicyConfiguration:  
+        TargetValue: 70
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification:
+          PredefinedMetricType: DynamoDBWriteCapacityUtilization
+  DiscordTranslateBotTranslatedTextReadCapacityScalableTarget:
+    Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+    Properties: 
+      MinCapacity: 2
+      MaxCapacity: 50
+      ResourceId: !Join
+        - /
+        - - table
+          - !Ref DiscordTranslateBotTranslatedText
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: "dynamodb:table:ReadCapacityUnits"
+      ServiceNamespace: dynamodb
+  DiscordTranslateBotTranslatedTextReadScalingPolicy: 
+    Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+    Properties: 
+      PolicyName: ReadAutoScalingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: 
+        Ref: DiscordTranslateBotTranslatedTextReadCapacityScalableTarget
+      TargetTrackingScalingPolicyConfiguration: 
+        TargetValue: 70
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification: 
+          PredefinedMetricType: DynamoDBReadCapacityUtilization
+
+  DiscordTranslateBotMessage:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: DiscordTranslateBot_Message
+      AttributeDefinitions:
+        -
+          AttributeName: message
+          AttributeType: S
+      KeySchema:
+        -
+          AttributeName: message
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+  DiscordTranslateBotMessageWriteCapacityScalableTarget:
+    Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+    Properties:
+      MinCapacity: 2
+      MaxCapacity: 20
+      ResourceId: !Join
+        - /
+        - - table
+          - !Ref DiscordTranslateBotMessage
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: "dynamodb:table:WriteCapacityUnits"
+      ServiceNamespace: dynamodb
+  DiscordTranslateBotMessageWriteScalingPolicy:
+    Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+    Properties:
+      PolicyName: WriteAutoScalingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId:
+        Ref: DiscordTranslateBotMessageWriteCapacityScalableTarget
+      TargetTrackingScalingPolicyConfiguration:  
+        TargetValue: 70
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification:
+          PredefinedMetricType: DynamoDBWriteCapacityUtilization
+  DiscordTranslateBotMessageReadCapacityScalableTarget:
+    Type: "AWS::ApplicationAutoScaling::ScalableTarget"
+    Properties: 
+      MinCapacity: 2
+      MaxCapacity: 50
+      ResourceId: !Join
+        - /
+        - - table
+          - !Ref DiscordTranslateBotMessage
+      RoleARN: !GetAtt ScalingRole.Arn
+      ScalableDimension: "dynamodb:table:ReadCapacityUnits"
+      ServiceNamespace: dynamodb
+  DiscordTranslateBotMessageReadScalingPolicy: 
+    Type: "AWS::ApplicationAutoScaling::ScalingPolicy"
+    Properties: 
+      PolicyName: ReadAutoScalingPolicy
+      PolicyType: TargetTrackingScaling
+      ScalingTargetId: 
+        Ref: DiscordTranslateBotMessageReadCapacityScalableTarget
+      TargetTrackingScalingPolicyConfiguration: 
+        TargetValue: 70
+        ScaleInCooldown: 60
+        ScaleOutCooldown: 60
+        PredefinedMetricSpecification: 
+          PredefinedMetricType: DynamoDBReadCapacityUtilization
+
+  ScalingRole: 
+    Type: "AWS::IAM::Role"
+    Properties: 
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          -
+            Effect:
+              Allow
+            Principal: 
+              Service: 
+                - "application-autoscaling.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies: 
+        -
+          PolicyName: DynamoDBCapacityChangePolicy
+          PolicyDocument: 
+            Version: "2012-10-17"
+            Statement: 
+              - 
+                Effect: Allow
+                Action: 
+                  - "dynamodb:DescribeTable"
+                  - "dynamodb:UpdateTable"
+                  - "cloudwatch:PutMetricAlarm"
+                  - "cloudwatch:DescribeAlarms"
+                  - "cloudwatch:GetMetricStatistics"
+                  - "cloudwatch:SetAlarmState"
+                  - "cloudwatch:DeleteAlarms"
+                Resource: "*"

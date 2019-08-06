@@ -2,6 +2,7 @@
 
 ## 変更履歴
 2019.08.03 Bot本体のPythonコードを公開しました。
+2019.08.06 AWS DynamoDBテーブル作成CloudFormationテンプレートを公開しました。
 
 ## 概要
 Discordサーバーで使える翻訳Botです。
