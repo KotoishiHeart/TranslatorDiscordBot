@@ -1,9 +1,9 @@
-# Discord用翻訳Bot
+# Discord用翻訳Bot ゆき
 
-## 変更履歴
-2019.08.03 Bot本体のPythonコードを公開しました。  
-2019.08.06 AWS DynamoDBテーブル作成CloudFormationテンプレートを公開しました。  
-           AWS Lambda用Python 3.7向けソースコードを公開しました。  
+## 成長記録
+2019.08.03 Discordで翻訳をするための翻訳Botとしてゆきちゃんは誕生しました。  
+2019.08.06 AWS CloudFormationでDynamoDBにゆきちゃんの記憶を入れるためのものをつくるものを公開しました。  
+           AWS Lambda用Python 3.7向けゆきちゃんの考えかたを公開しました。  
   
 ## 概要
 Discordサーバーで使える翻訳Botです。  
